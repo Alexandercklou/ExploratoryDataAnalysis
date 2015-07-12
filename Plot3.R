@@ -6,7 +6,7 @@ if (!file.exists("./household_power_consumption.txt")) {
   unzip("./power_data.zip", overwrite = T, exdir = ".")
 }
 
-Raw<-filter(read.table("./household_power_consumption.txt",sep=";",header=TRUE),Date=="1/2/2007"|Date=="2/2/2007")
+Raw<-filter(read.table("./household_power_consumption.txt",sep=";",header=TRUE,na.strings = "?"),Date=="1/2/2007"|Date=="2/2/2007")
 Raw$DateTime<-strptime(paste(Raw$Date, Raw$Time), "%d/%m/%Y %H:%M:%S")
 Raw$Date<-as.Date(Raw$Date, format="%d/%m/%Y")
 for (i in 3:9){Raw[,i]<-as.numeric(Raw[,i])}
